@@ -20,7 +20,6 @@ os.environ['LANG'] = 'en_US.UTF-8'
 BASE_DIR = dirname(os.path.dirname(os.path.realpath(__file__)))
 DJANGO_ROOT = dirname(dirname(dirname(abspath(__file__))))
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.10/howto/deployment/checklist/
 
@@ -246,6 +245,6 @@ SOCIALACCOUNT_PROVIDERS = \
                 'last_name'],
             'EXCHANGE_TOKEN': True,
             'VERIFIED_EMAIL': False,
-            'VERSION': 'v2.4'
+            'VERSION': 'v2.8'
         }
     }
