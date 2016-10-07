@@ -30,6 +30,7 @@ router.register(r'albums', AlbumViewSet)
 router.register(r'songs', SongViewSet)
 
 urlpatterns = [
+    url(r'^', include('index.urls')),
     url(r'^admin/', admin.site.urls),
     url(r'^api/', include(router.urls)),
 

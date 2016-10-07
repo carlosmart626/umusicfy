@@ -55,6 +55,7 @@ INSTALLED_APPS = [
     # Apps
     'user_profile',
     'songs',
+    'index',
 ]
 
 SITE_ID = 1

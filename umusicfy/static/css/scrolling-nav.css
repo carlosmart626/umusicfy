@@ -1,0 +1,592 @@
+/*!
+ */
+
+/*FONTS*/
+@font-face{
+    font-family: 'Open Sans';
+    src: url('/static/fonts/OpenSans-Regular-webfont.eot');
+    src: url('/static/fonts/OpenSans-Regular-webfont.eot?#iefix') format('embedded-opentype'),
+         url('/static/fonts/OpenSans-Regular-webfont.woff') format('woff'),
+         url('/static/fonts/OpenSans-Regular-webfont.ttf') format('truetype'),
+         url('/static/fonts/OpenSans-Regular-webfont.svg#open_sansregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face{
+    font-family: 'roboto_slabregular';
+    src: url('/static/fonts/RobotoSlab-Regular-webfont.eot');
+    src: url('/static/fonts/RobotoSlab-Regular-webfont.eot?#iefix') format('embedded-opentype'),
+         url('/static/fonts/RobotoSlab-Regular-webfont.woff') format('woff'),
+         url('/static/fonts/RobotoSlab-Regular-webfont.ttf') format('truetype'),
+         url('/static/fonts/RobotoSlab-Regular-webfont.svg#roboto_slabregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face{
+    font-family: 'cuprumregular';
+    src: url('/static/fonts/Cuprum-Regular-webfont.eot');
+    src: url('/static/fonts/Cuprum-Regular-webfont.eot?#iefix') format('embedded-opentype'),
+         url('/static/fonts/Cuprum-Regular-webfont.woff') format('woff'),
+         url('/static/fonts/Cuprum-Regular-webfont.ttf') format('truetype'),
+         url('/static/fonts/Cuprum-Regular-webfont.svg#cuprumregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+body {
+	width: 100%;
+    height: 100%;
+	font-family: 'Open Sans', "Helvetica Neue", Helvetica, Arial, sans-serif;
+	font-size: 16px;
+	line-height: 1.428571429;
+}
+html {
+    width: 100%;
+    height: 100%;
+}
+.table {
+	margin-bottom: 0px;
+}
+h1,h2,h3,h4,h5,h6{
+	font-family: 'cuprumregular', "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+p > strong{
+	font-family: 'cuprumregular', "Helvetica Neue", Helvetica, Arial, sans-serif;
+	font-size: 1.2em;
+}
+strong{
+	font-family: 'cuprumregular', "Helvetica Neue", Helvetica, Arial, sans-serif;
+	font-size: 1.2em;
+}
+.table > thead > tr{
+	font-family: 'cuprumregular', "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+legend{
+	font-family: 'roboto_slabregular', "Helvetica Neue", Helvetica, Arial, sans-serif;
+	font-size: 1.5em;
+}
+
+@media(min-width:767px) {
+    .navbar {
+        padding: 20px 0;
+        -webkit-transition: background .5s ease-in-out,padding .5s ease-in-out;
+        -moz-transition: background .5s ease-in-out,padding .5s ease-in-out;
+        transition: background .5s ease-in-out,padding .5s ease-in-out;
+    }
+
+    .top-nav-collapse {
+        padding: 0;
+    }
+}
+
+/* Demo Sections - You can use these as guides or delete them - the scroller will work with any sort of height, fixed, undefined, or percentage based.
+The padding is very important to make sure the scrollspy picks up the right area when scrolled to. Adjust the margin and padding of sections and children
+of those sections to manage the look and feel of the site. */
+
+.flat-shadow{
+	-webkit-transition: all 0.2s;
+    -moz-transition: all 0.2s;
+    -o-transition: all 0.2s ;
+}
+.flat-shadow:hover{
+	color: #fff;
+    text-shadow: 
+    rgba(179, 25, 35, 1) 1px 1px,
+    rgba(179, 25, 35, 0.9) 2px 2px,
+    rgba(179, 25, 35, 0.9) 3px 3px,
+    rgba(179, 25, 35, 0.9) 4px 4px,
+    rgba(179, 25, 35, 0.9) 5px 5px,
+    rgba(179, 25, 35, 0.9) 6px 6px,
+    rgba(179, 25, 35, 0.8) 7px 7px,
+    rgba(179, 25, 35, 0.8) 8px 8px,
+    rgba(179, 25, 35, 0.8) 9px 9px,
+    rgba(179, 25, 35, 0.8) 10px 10px,
+    rgba(179, 25, 35, 0.8) 11px 11px,
+    rgba(179, 25, 35, 0.8) 12px 12px,
+    rgba(179, 25, 35, 0.7) 13px 13px,
+    rgba(179, 25, 35, 0.7) 14px 14px,
+    rgba(179, 25, 35, 0.7) 15px 15px,
+    rgba(179, 25, 35, 0.7) 16px 16px,
+    rgba(179, 25, 35, 0.7) 17px 17px,
+    rgba(179, 25, 35, 0.5) 18px 18px,
+    rgba(179, 25, 35, 0.5) 19px 19px,
+    rgba(179, 25, 35, 0.5) 20px 20px,
+    rgba(179, 25, 35, 0.4) 21px 21px,
+    rgba(179, 25, 35, 0.4) 22px 22px,
+    rgba(179, 25, 35, 0.4) 23px 23px,
+    rgba(179, 25, 35, 0.4) 24px 24px,
+    rgba(179, 25, 35, 0.3) 25px 25px,
+    rgba(179, 25, 35, 0.3) 26px 26px,
+    rgba(179, 25, 35, 0.3) 27px 27px,
+    rgba(179, 25, 35, 0.3) 28px 28px,
+    rgba(179, 25, 35, 0.3) 29px 29px,
+    rgba(179, 25, 35, 0.3) 40px 40px,
+    rgba(179, 25, 35, 0.3) 31px 31px,
+    rgba(179, 25, 35, 0.3) 32px 32px,
+    rgba(179, 25, 35, 0.3) 33px 33px,
+    rgba(179, 25, 35, 0.3) 34px 34px,
+    rgba(179, 25, 35, 0.3) 35px 35px,
+    rgba(179, 25, 35, 0.3) 36px 36px,
+    rgba(179, 25, 35, 0.15) 37px 37px,
+    rgba(179, 25, 35, 0.15) 38px 38px,
+    rgba(179, 25, 35, 0.15) 39px 39px,
+    rgba(179, 25, 35, 0.15) 30px 30px,
+    rgba(179, 25, 35, 0.15) 41px 41px,
+    rgba(179, 25, 35, 0.10) 42px 42px,
+    rgba(179, 25, 35, 0.10) 43px 43px,
+    rgba(179, 25, 35, 0.10) 44px 44px,
+    rgba(179, 25, 35, 0.10) 45px 45px,
+    rgba(179, 25, 35, 0.05) 46px 46px,
+    rgba(179, 25, 35, 0.05) 47px 47px,
+    rgba(179, 25, 35, 0.05) 48px 48px,
+    rgba(179, 25, 35, 0.05) 49px 49px;
+}
+	
+.intro-section {
+    min-height: 70%;
+    padding-top: 50px;
+    margin-top: 90px;
+    text-align: center;
+    background: #fff;
+}
+
+.about-section {
+    min-height: 100%;
+    padding-top: 200px;
+    text-align: center;
+    background: #eee;
+}
+.about-section h1{
+	font-size: 40px;
+	font-family: "roboto_slabregular";
+	margin-bottom: 50px;
+}
+.review-section {
+    height: 0%;
+    text-align: center;
+    background: #fbfbfb;
+    box-shadow: inset 0px 0px 5px #7f7f7f;
+    overflow: hidden;
+	-webkit-transition: all 0.5s ease-in-out;
+	-moz-transition: all 0.5s ease-in-out;
+	-o-transition: all 0.5s ease-in-out;
+	transition: all 0.5s ease-in-out;
+}
+.box-contraste{
+	border-radius: 10px;
+	background: rgba(245, 245, 245, 0.57);
+	padding-left: 40px;
+	padding-right: 40px;
+}
+.login-section {
+	background-image: url("/static/img/hero-img-a.jpg");
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+    min-height: 100%;
+    padding-top: 22%;
+    text-align: center;
+}
+.transition-ease{
+	-webkit-transition: all .2s ease-in-out;
+    -moz-transition: all .2s ease-in-out;
+    transition: all .2s ease-in-out;
+}
+.login-section h1{
+	font-size: 40px;
+	font-family: "roboto_slabregular";
+	margin-bottom: 50px;
+}
+
+.menu-section {
+    min-height: 100%;
+    padding-top: 150px;
+    padding-bottom: 100px;
+    text-align: center;
+    background: #eee;
+}
+
+.services-section {
+    min-height: 100%;
+    padding-top: 150px;
+    text-align: center;
+    background: #fff;
+}
+
+.contact-section {
+    min-height: 100%;
+    padding-top: 150px;
+    text-align: center;
+    background: #eee;
+}
+.intro-section{
+	background-image: url("/static/img/hero-img.jpg");
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+	color: #fff;
+	font-size: 40px;
+	font-family: "roboto_slabregular";
+	text-align: right;
+
+}
+.navbar-nav>li>a.btn {
+	padding-top: 5px;
+	padding-bottom: 5px;
+	margin-top: 10px;
+}
+.intro-section h1{
+	font-size: 60px;
+	width: inherit;
+	margin-top: 30%;
+	margin-bottom: 5px;
+}
+.btn-circle {
+	width: 30px;
+	height: 30px;
+	text-align: center;
+	padding: 6px 0;
+	font-size: 12px;
+	line-height: 1.428571429;
+	border-radius: 15px;
+}
+.btn-circle:hover {
+	box-shadow: 0px 1px 2px #737373;
+}
+.btn-circle.btn-lg {
+	width: 50px;
+	height: 50px;
+	padding: 10px 16px;
+	font-size: 18px;
+	line-height: 1.33;
+	border-radius: 25px;
+}
+.btn-circle.btn-xl {
+	width: 70px;
+	height: 70px;
+	padding: 10px 16px;
+	font-size: 24px;
+	line-height: 1.33;
+	border-radius: 35px;
+}
+.menu-item{
+	margin: auto;
+	height: 200px;
+	width: 100%;
+	background-color: #fff;
+	color:#000;
+	margin-top: 20px;
+	display: inline-table;
+	padding-top: 45px;
+	-webkit-transition: all 0.5s ease-in-out;
+	-moz-transition: all 0.5s ease-in-out;
+	-o-transition: all 0.5s ease-in-out;
+	transition: all 0.5s ease-in-out;
+}
+
+.menu-item:hover{
+	color: #fff;
+	background-color: #d41a26;
+	box-shadow: 0px 3px 5px #555;
+
+}
+.menu-item > p.menu-item-label{
+	margin-top: 30px;
+	font-size: 20px;
+	font-family: "roboto_slabregular";
+}
+.menu-item > p > a{
+	color: #000;
+	text-decoration: none;
+	-webkit-transition: all 0.5s ease-in-out;
+	-moz-transition: all 0.5s ease-in-out;
+	-o-transition: all 0.5s ease-in-out;
+	transition: all 0.5s ease-in-out;
+}
+.menu-item > p > a:hover{
+	color:#fff;
+}
+
+.menu-item-bg{
+	margin: auto;
+	height: 200px;
+	width: 100%;
+	background-color: #fff;
+	color:#000;
+	margin-top: 20px;
+	display: inline-table;
+	padding-top: 30px;
+	-webkit-transition: all 0.5s ease-in-out;
+	-moz-transition: all 0.5s ease-in-out;
+	-o-transition: all 0.5s ease-in-out;
+	transition: all 0.5s ease-in-out;
+}
+
+.info-section{
+	margin-top: 50px;
+	padding-top: 50px;
+	background-color: #bebebe;
+	padding-bottom: 20px;
+	text-align: center;
+}
+.info_section--bgblue{
+	background-color: blue;
+}
+.detail-section{
+	padding-top: 30px;
+	min-height: 100%;
+	font-size: 12px;
+}
+.problem-section{
+	min-height: 150px;
+	line-height: 150px;
+	font-size: 24px;
+	color: white;
+	background: #d41a26;
+}
+
+.problem-section > div > div > div.col-md-8 > div > div.col-md-8 > h1{
+	line-height: 110px;
+}
+
+.detail-section-bg{
+	padding-top: 30px;
+	min-height: 50%;
+}
+.alto-cien-x-cien{
+	min-height: 100% !important;
+}
+.btn-logout{
+	color: #fff !important;
+	-webkit-transition: all 0.5s ease-in-out;
+	-moz-transition: all 0.5s ease-in-out;
+	-o-transition: all 0.5s ease-in-out;
+	transition: all 0.5s ease-in-out;
+}
+.btn-logout:hover{
+	color: #000 !important;
+}
+.content-print *{
+	font-size: 10px;
+	margin: 0px;
+	padding: 2px;
+
+}
+.content-print-detail *{
+	padding: 0px;
+	font-size: 9px;
+	margin: 0px;
+}
+.table-condensed-print>tbody>tr>td,
+.table-condensed-print>tbody>tr>th{
+	padding: 1px;
+	font-size: 9px;
+	margin: 0px;
+}
+.content-print h2{
+	font-size: 30px;
+	margin-bottom: 10px;
+}
+.logo-brand{
+	-webkit-transition: all 0.5s ease-in-out;
+  -moz-transition: all 0.5s ease-in-out;
+  -o-transition: all 0.5s ease-in-out;
+  transition: all 0.5s ease-in-out;
+}
+
+
+.logo-img{
+	height: 40px;
+	margin-top: -10px;
+}
+.logo-img-sm{
+	height: 30px;
+	margin-top: -5px;
+}
+.td-right{
+	text-align: right;
+}
+.shadow{
+	box-shadow: 0px 1px 3px #737373;
+}
+.feature-img{
+	width: 90%;
+}
+ul.features{
+	text-align: left;
+	list-style-type: none;
+}
+p.features{
+	text-align: left;
+}
+footer {
+    margin: 25px 0;
+	padding: 0 25px;
+}
+footer *{
+	margin: 0px;
+	font-size: 0.91em;
+}
+.grafica-barras{
+	margin: auto !important;
+	width: 100% !important;
+}
+.cargue_form > * > form-control{
+	font-size: 10px;
+}
+
+@media(max-width:900px) {
+	.intro-section{
+		font-size: 20px;
+		background-size: auto 100%;
+		min-height: 400px;
+		margin-top: 50px;
+	}
+	.intro-section h1{
+		font-size: 30px;
+	}
+}
+
+@media(max-width:400px) {
+	.intro-section{
+		font-size: 20px;
+		background-size: auto 100%;
+		min-height: 200px;
+		margin-top: 50px;
+	}
+	.intro-section h1{
+		font-size: 30px;
+
+	}
+	.logo-img{
+		height: 30px;
+		margin-top: -5px;
+	}
+	.info-section{
+		margin-top: 50px;
+		padding-top: 10px;
+	}
+}
+
+.panel-body > table{
+	margin-bottom: inherit;
+}
+
+.filtrar > .form-control{
+	display: inline !important;
+	width: 40% !important;
+}
+.lista-productos, .lista-cirugias{
+	text-align: left !important;
+	font-size: 14px;
+}
+.renglon-division{
+	background-color: #DEEAEA;
+	text-align: left;
+}
+.renglon-division .titulo{
+	float: left;
+	font-weight: 900;
+	margin-left: 30px;
+}
+.renglon-division .cantidad{
+	float: right;
+}
+.lista_bodegas i{
+	font-size: 80px !important;
+}
+.lista_bodegas p{
+	line-height: 15px;
+}
+.info-bodega p, .info-producto p, .info-procedimiento p{
+	/* text-align: center; */
+}
+.info-bodega b, .info-producto b{
+	font-weight: bolder;
+}
+.proc-inactivo{
+	color: #bebebe !important;
+}
+.detail-section small{
+	font-size: 15px;
+}
+.detail-section{
+	min-height: 50% !important;
+}
+hr{
+	border-top: 1px solid #bebebe;
+}
+.adicional-producto{
+	background-color: #ffffff !important;
+}
+.cell{
+	height: 100%;
+}
+.panel-dash{
+	height: 100%;
+}
+.form-control-text{
+	margin-top: 5px !important;
+}
+.input-group-addon{
+	min-width: 34px;
+}
+.row-form-update{
+	margin-right: 10px !important;
+}
+.a-producto{
+	text-decoration: none;
+	color: black;
+}
+.a-producto:hover{
+	text-decoration: none;
+	color: #03244a;
+}
+.td-center{
+	text-align: center;
+}
+.td-right{
+	text-align: right;
+}
+.td-left{
+	text-align: left;
+}
+
+.btn-circle-help{
+	display: inline-block;
+	margin-bottom: 0;
+	width: 80px;
+	height: 80px;
+	font-size: 40px;
+	font-weight: 400;
+	line-height: 80px;
+	text-align: center;
+	white-space: nowrap;
+	vertical-align: middle;
+	-ms-touch-action: manipulation;
+	touch-action: manipulation;
+	cursor: pointer;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	background-image: none;
+	border: 1px solid rgba(255, 255, 255, 1);
+	border-radius: 50%;
+	-webkit-transition: all 0.5s ease-in-out;
+	-moz-transition: all 0.5s ease-in-out;
+	-o-transition: all 0.5s ease-in-out;
+	transition: all 0.5s ease-in-out;
+}
+.btn-circle-help:hover{
+	background-color: white;
+	text-decoration: none;
+	border: 1px solid rgba(158, 0, 0, 1);
+}
+.text-mute{
+	color: #919191;
+}
+
