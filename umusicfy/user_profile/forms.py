@@ -13,7 +13,7 @@ class UserProfileUpdateForm(ModelForm):
     class Meta:
         model = User
 
-        fields = ('first_name', 'last_name', 'email', 'biography', )
+        fields = ('first_name', 'last_name', 'email', 'profile_picture', 'biography', )
         widgets = {
             'first_name': forms.TextInput(attrs={'class': 'datos_usuario form-control', 'placeholder': _('First Name'), }),
             'last_name': forms.TextInput(attrs={'class': 'datos_usuario form-control', 'placeholder': _('Last Name'), }),

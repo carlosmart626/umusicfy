@@ -1,0 +1,7 @@
+Hi {{ user.full_name }},
+
+You have created a new playlist called {{ playlist.name }}.
+
+Enjoy your music,
+
+The UMusicfy team

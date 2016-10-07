@@ -5,9 +5,7 @@ from django.utils.translation import ugettext_lazy as _
 from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 
-from songs.models import Song, Artist
-
-from .tasks import send_email_notification_task
+from songs.models import Song
 
 
 def upload_to_profile(instance, filename):
@@ -18,8 +16,7 @@ class UserProfile(models.Model):
     user = models.OneToOneField(User)
     profile_picture = models.ImageField(upload_to=upload_to_profile, height_field=150, width_field=150)
     biography = models.TextField()
-    following = models.ManyToManyField(User, related_name='users_following')
-    artist_following = models.ManyToManyField(Artist, related_name='artist_following')
+    friends = models.ManyToManyField(User)
 
     class Meta:
         verbose_name = _('User Profile')
@@ -30,10 +27,9 @@ class UserProfile(models.Model):
 
 
 class PlayList(models.Model):
-    owner = models.ForeignKey(User)
-    title = models.CharField(max_length=250)
+    owner = models.ForeingKey(User)
     creation_time = models.DateField(auto_now_add=True)
-    followers = models.ManyToManyField(User, related_name='playlist_followers')
+    followers = models.ManyToManyField(User)
     songs = models.ManyToManyField(Song, related_name='play_list_songs', through='SongsPlaylist')
 
 
@@ -45,6 +41,6 @@ class SongsPlaylist(models.Model):
 
 
 def send_email_notification(sender, instance, created, **kwargs):
-    send_email_notification_task.delay()
+    pass
 
 post_save.connect(send_email_notification, sender=PlayList)
