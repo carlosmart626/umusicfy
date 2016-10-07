@@ -32,6 +32,11 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
+ADMINS = (
+    ('carlosmart', 'carlosmart626@gmail.com'),
+)
+
+MANAGERS = ADMINS
 
 # Application definition
 
@@ -153,8 +158,6 @@ REST_FRAMEWORK = {
         'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
     ),
 }
-
-CSRF_FAILURE_VIEW = 'portal.csfrview.csrf_failure'
 
 JWT_AUTH = {
     'JWT_ENCODE_HANDLER':
