@@ -5,7 +5,7 @@ from celery import Celery
 from django.conf import settings
 
 # set the default Django settings module for the 'celery' program.
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'hello.settings.dev')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'umusicfy.settings.dev')
 
 app = Celery('umusicfy')
 
