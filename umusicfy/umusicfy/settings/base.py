@@ -98,8 +98,12 @@ WSGI_APPLICATION = 'umusicfy.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'umusicfy',
+        'USER': 'umusicfy_user',
+        'PASSWORD': 'umusicfy_pass',
+        'HOST': 'localhost',
+        'PORT': 5432
     }
 }
 
@@ -196,7 +200,7 @@ MEDIA_URL = '/media/'
 # in apps' "static/" subdirectories and in STATICFILES_DIRS.
 # Example: "/var/www/example.com/static/"
 # STATIC_ROOT = normpath(join(DJANGO_ROOT, 'static'))
-STATIC_ROOT = ''
+STATIC_ROOT = '/var/www/umusicfy.ml/static/'
 
 # URL prefix for static files.
 # Example: "http://example.com/static/", "http://static.example.com/"
