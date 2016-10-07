@@ -29,7 +29,7 @@ nginx:
   volumes_from:
     - umusicfy
   links:
-    - web:web
+    - umusicfy:umusicfy
 
 postgres:
   restart: always
