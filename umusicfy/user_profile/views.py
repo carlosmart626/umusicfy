@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 from .forms import UserProfileUpdateForm, SetPasswordForm
 from django.http import HttpResponseRedirect
 
-from .models import Playlist, UserProfile
+from .models import PlayList, UserProfile
 from .forms import PlaylistForm
 
 
@@ -65,19 +65,30 @@ class UserProfileDetailView(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super(UserProfileDetailView, self).get_context_data(**kwargs)
-        context['playlist'] = Playlist.objects.filter(owner=self.object).order_by('-creation_time')
+        context['playlist'] = PlayList.objects.filter(owner=self.object).order_by('-creation_time')
         return context
 
 
 class PlaylistDetailView(DetailView):
-    model = Playlist
+    model = PlayList
     template_name = 'userprofile_playlist.html'
 
 
 class PlaylistCreateView(CreateView):
     template_name = 'userprofile_playlist_create.html'
-    model = Playlist
+    model = PlayList
     form_class = PlaylistForm
+
+    def get(self, request, *args, **kwargs):
+        """
+        Handles GET requests and instantiates blank versions of the form
+        and its inline formsets.
+        """
+        self.object = None
+        form_class = self.get_form_class()
+        form = self.get_form(form_class)
+        form.init_form_data(request.user)
+        return self.render_to_response(self.get_context_data(form=form))
 
     def get_success_url(self):
         """
@@ -91,7 +102,7 @@ class FollowUserProfileView(View):
     def get(self, request, *args, **kwargs):
         '''
         '''
-        user_to_folow = UserProfile.objects.get(id=self.kwargs['userprofile'])
+        user_to_folow = UserProfile.objects.get(id=self.kwargs['user_id'])
         request.user.following.add(user_to_folow)
         return HttpResponseRedirect('/user-profile/' + str(request.user.id))
 
@@ -101,6 +112,6 @@ class FollowPlaylistView(View):
     def get(self, request, *args, **kwargs):
         '''
         '''
-        playlist_to_folow = Playlist.objects.get(id=self.kwargs['userprofile'])
+        playlist_to_folow = Playlist.objects.get(id=self.kwargs['playlist_id'])
         playlist_to_folow.followers.add(request.user)
         return HttpResponseRedirect('/user-profile/' + str(playlist_to_folow.owner) + "/" + str(playlist_to_folow.id))

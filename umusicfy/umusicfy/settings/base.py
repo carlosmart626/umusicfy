@@ -14,6 +14,7 @@ https://docs.djangoproject.com/en/1.10/ref/settings/
 import os
 import datetime
 from os.path import abspath, dirname, join, normpath
+from pusher import Pusher
 
 os.environ['LANG'] = 'en_US.UTF-8'
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -55,6 +56,7 @@ INSTALLED_APPS = [
     'allauth.socialaccount',
     'allauth.socialaccount.providers.facebook',
     'allauth.socialaccount.providers.github',
+    'django.contrib.algoliasearch',
 
     # Apps
     'user_profile',
@@ -248,3 +250,18 @@ SOCIALACCOUNT_PROVIDERS = \
             'VERSION': 'v2.8'
         }
     }
+
+LOGIN_REDIRECT_URL = '/user-profile/'
+
+EMAIL_HOST = 'smtp.sendgrid.net'
+EMAIL_HOST_USER = 'umusicfyapp'
+EMAIL_HOST_PASSWORD = 'the.umusicfyapp.2015'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+
+ALGOLIA = {
+    'APPLICATION_ID': "C1R5PGKVPF",
+    'API_KEY': "5e20f37d67428e2f286dc7c7c465ca11"
+}
+
+pusher = Pusher(app_id=u'256573', key=u'ba23c5dd4731d5bfa933', secret=u'173bf632b3736f3e3d20')

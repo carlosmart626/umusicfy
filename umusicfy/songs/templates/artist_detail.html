@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block content %}
+    {% for album in top_albums %}
+        <p>
+            {{album}}
+        </p>
+    {% endfor %}
+    {% for song in top_songs  %}
+        <p>
+            {{song}}
+        </p>
+    {% endfor %}
+    {% for album in albums %}
+        <p>
+            {{album}}
+        </p>
+    {% endfor %}
+    {% for song in songs  %}
+        <p>
+            {{song}}
+        </p>
+    {% endfor %}
+{% endblock %}

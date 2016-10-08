@@ -4,6 +4,7 @@ from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from django.contrib.auth.models import User
 from django.db.models.signals import post_save
+from django.conf import settings
 
 from songs.models import Song, Artist
 
@@ -35,6 +36,16 @@ class PlayList(models.Model):
     creation_time = models.DateField(auto_now_add=True)
     followers = models.ManyToManyField(User, related_name='playlist_followers')
     songs = models.ManyToManyField(Song, related_name='play_list_songs', through='SongsPlaylist')
+
+    def save(self, *args, **kwargs):
+        '''
+        Send pushe notification
+        '''
+        if self.pk is not None:
+            orig = PlayList.objects.get(pk=self.pk)
+            if orig.songs.count() != self.songs.count():
+                settings.pusher.trigger(str(self.title), u'update', {u'some': u'data'})
+        super(self.__class__, self).save(*args, **kwargs)
 
 
 class SongsPlaylist(models.Model):

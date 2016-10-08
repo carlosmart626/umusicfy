@@ -5,7 +5,7 @@ from django.forms import ModelForm
 from django.utils.translation import ugettext_lazy as _
 from django.contrib.auth.models import User
 
-from .models import Playlist
+from .models import PlayList
 
 
 class UserProfileUpdateForm(ModelForm):
@@ -15,12 +15,11 @@ class UserProfileUpdateForm(ModelForm):
     class Meta:
         model = User
 
-        fields = ('first_name', 'last_name', 'email', 'profile_picture', 'biography', )
+        fields = ('first_name', 'last_name', 'email', )
         widgets = {
             'first_name': forms.TextInput(attrs={'class': 'datos_usuario form-control', 'placeholder': _('First Name'), }),
             'last_name': forms.TextInput(attrs={'class': 'datos_usuario form-control', 'placeholder': _('Last Name'), }),
             'email': forms.TextInput(attrs={'class': 'datos_usuario form-control', 'placeholder': _('e-mail'), }),
-            'biography': forms.TextInput(attrs={'class': 'datos_usuario form-control', 'placeholder': _('biography'), }),
         }
 
     class Media:
@@ -77,16 +76,16 @@ class PlaylistForm(ModelForm):
         )
 
     class Meta:
-        model = Playlist
+        model = PlayList
 
         fields = ('title', 'owner',)
         widgets = {
-            'title': forms.TextInput(attrs={'class': 'datos_usuario form-control', 'placeholder': 'Procedimiento'}),
+            'title': forms.TextInput(attrs={'class': 'datos_usuario form-control', 'placeholder': 'Title playlist'}),
         }
 
     def clean(self):
         cleaned_data = super(PlaylistForm, self).clean()
         title = cleaned_data.get("title")
         owner = cleaned_data.get("owner")
-        if Playlist.objects.filter(owner__id=owner, title=title).first() is not None:
+        if PlayList.objects.filter(owner__id=owner.id, title=title).first() is not None:
             raise forms.ValidationError("You already have a playlist named %s" % title)

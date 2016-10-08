@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block content %}
+    {{object}}
+{% endblock %}
+
+{% block extra_js %}
+<script src="//js.pusher.com/3.2/pusher.min.js"></script>
+<script type="text/javascript">
+    var pusher = new Pusher('APP_KEY');
+    var channel = pusher.subscribe('{{object.id}}');
+    channel.bind('update', function(data) {
+      alert('An event was triggered with message: ' + data.message);
+    });
+</script>
+{% endblock %}

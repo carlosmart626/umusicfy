@@ -35,6 +35,9 @@ class SongViewSet(viewsets.ModelViewSet):
 class ArtistDetailView(DetailView):
 
     model = Artist
+    template_name = 'artist_detail.html'
+    slug_url_kwarg = 'artist_name_slug'
+    slug_field = 'name_slug'
 
     def get_context_data(self, **kwargs):
         context = super(ArtistDetailView, self).get_context_data(**kwargs)
@@ -48,6 +51,9 @@ class ArtistDetailView(DetailView):
 class AlbumDetailView(DetailView):
 
     model = Album
+    template_name = 'album_detail.html'
+    slug_url_kwarg = 'album_name_slug'
+    slug_field = 'name_slug'
 
     def get_context_data(self, **kwargs):
         context = super(ArtistDetailView, self).get_context_data(**kwargs)
@@ -60,6 +66,6 @@ class FollowArtistView(View):
     def get(self, request, *args, **kwargs):
         '''
         '''
-        user_to_folow = UserProfile.objects.get(id=self.kwargs['userprofile'])
+        user_to_folow = Artist.objects.get(id=self.kwargs['artist_name_slug'])
         request.user.following.add(user_to_folow)
         return HttpResponseRedirect('/user-profile/' + str(request.user.id))
