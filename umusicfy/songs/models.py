@@ -29,6 +29,7 @@ class Album(models.Model):
     """
     name = models.CharField(max_length=250)
     album_cover = models.ImageField(upload_to=upload_to_artist, height_field=512, width_field=512)
+    artist = models.ForeignKey(Artist)
     publication_date = models.DateField()
     rating = models.PositiveIntegerField(default=0)
 

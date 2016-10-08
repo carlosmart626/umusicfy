@@ -5,6 +5,8 @@ from django.forms import ModelForm
 from django.utils.translation import ugettext_lazy as _
 from django.contrib.auth.models import User
 
+from .models import Playlist
+
 
 class UserProfileUpdateForm(ModelForm):
     """
@@ -59,3 +61,32 @@ class SetPasswordForm(forms.Form):
         if commit:
             self.user.save()
         return self.user
+
+
+class PlaylistForm(ModelForm):
+
+    def init_form_data(self, user):
+        self.fields['owner'] = forms.ModelChoiceField(
+            widget=forms.Select(
+                attrs={
+                    'class': 'datos_usuario form-control'
+                }
+            ),
+            queryset=User.objects.filter(id=user.id),
+            initial=User.objects.filter(id=user.id)[0]
+        )
+
+    class Meta:
+        model = Playlist
+
+        fields = ('title', 'owner',)
+        widgets = {
+            'title': forms.TextInput(attrs={'class': 'datos_usuario form-control', 'placeholder': 'Procedimiento'}),
+        }
+
+    def clean(self):
+        cleaned_data = super(PlaylistForm, self).clean()
+        title = cleaned_data.get("title")
+        owner = cleaned_data.get("owner")
+        if Playlist.objects.filter(owner__id=owner, title=title).first() is not None:
+            raise forms.ValidationError("You already have a playlist named %s" % title)
