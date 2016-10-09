@@ -14,7 +14,23 @@ umusicfy:
   env_file: .env
   environment:
     DEBUG: 'True'
-  command: /usr/local/bin/gunicorn umusicfy.wsgi:application -w 2 -b :8000
+  command: ./run_web.sh
+
+celery:
+  restart: always
+  build: ./umusicfy
+  links:
+    - postgres:postgres
+    - redis:redis
+  volumes:
+    - /usr/src/app
+    - /usr/src/app/static
+    - /var/www/umusicfy/media:/usr/src/app/media
+    - /var/www/umusicfy.ml/static:/var/www/umusicfy.ml/static
+  env_file: .env
+  environment:
+    DEBUG: 'True'
+  command: ./run_celery.sh
 
 nginx:
   restart: always

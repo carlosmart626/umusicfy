@@ -1,0 +1,26 @@
+"artists": [
+      {
+        "name": "Modi obcaecati inventore a iste in beatae odit, iste odit minima unde delectus sequi iusto ratione aliquid repellendus dolores, eveniet soluta id qui animi aperiam, corporis inventore officiis esse. Odio a repudiandae, solut",
+        "name_slug": "modi-obcaecati-inventore-a-iste-in-beatae-odit-iste-odit-minima-unde-delectus-sequi-iusto-ratione-aliquid-repellendus-dolores-eveniet-soluta-id-qui-animi-aperiam-corporis-inventore-officiis-esse-odio-a-repudiandae-solut",
+        "profile_picture": "",
+        "profile_hero_image": "",
+        "albums": [
+            {
+              "name": "Architecto illo dicta inventore voluptates, cupidi",
+              "name_slug": "architecto-illo-dicta-inventore-voluptates-cupidit",
+              "album_cover": "",
+              "publication_date": "2014-05-23",
+              "rating": 0,
+              "songs":[
+                  {
+                      "title": "Tempora delectus quidem numquam ea maiores temp",
+                      "rating": 0,
+                      "album": 227,
+                      "duration": 0
+                  }
+
+              ]
+            },
+        ]
+    }
+]

@@ -1,0 +1,64 @@
+{
+    "artists": [
+        {
+            "name": "Linkin Park",
+            "profile_picture": "",
+            "profile_hero_image": "",
+            "albums": [
+                {
+                    "name": "Meteora",
+                    "album_cover": "",
+                    "publication_date": "2014-05-23",
+                    "rating": 0,
+                    "songs": [
+                        {
+                            "title": "Numb",
+                            "rating": 0,
+                            "duration": 230
+                        },
+                        {
+                            "title": "Faint",
+                            "rating": 0,
+                            "duration": 230
+                        },
+                        {
+                            "title": "Breaking the habit",
+                            "rating": 0,
+                            "duration": 230
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Paparoach",
+            "profile_picture": "",
+            "profile_hero_image": "",
+            "albums": [
+                {
+                    "name": "Insane",
+                    "album_cover": "",
+                    "publication_date": "2014-05-23",
+                    "rating": 0,
+                    "songs": [
+                        {
+                            "title": "Song1",
+                            "rating": 0,
+                            "duration": 230
+                        },
+                        {
+                            "title": "Song2",
+                            "rating": 0,
+                            "duration": 230
+                        },
+                        {
+                            "title": "Song3",
+                            "rating": 0,
+                            "duration": 230
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}
