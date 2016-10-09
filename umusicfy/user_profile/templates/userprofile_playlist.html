@@ -1,14 +1,40 @@
 {% extends "base.html" %}
 
 {% block content %}
-    {{object}}
+<table class="ui compact celled table">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Artist</th>
+      <th>Album</th>
+      <th>Duration</th>
+      <th>Ranking</th>
+    </tr>
+  </thead>
+  <tbody>
+      {% for song in object.songs.all  %}
+          <tr>
+            <td>{{song.title}}</td>
+            <td>{{song.album.artist}}</td>
+            <td>{{song.album.name}}</td>
+            <td>{{song.get_duration_time}}</td>
+            <td>{{song.ranking}}</td>
+          </tr>
+      {% empty %}
+          <p>
+              No songs
+          </p>
+      {% endfor %}
+    </tbody>
+</table>
+    <a href="{% url 'song_list_view' %}">Add Songs</a>
 {% endblock %}
 
 {% block extra_js %}
 <script src="//js.pusher.com/3.2/pusher.min.js"></script>
 <script type="text/javascript">
-    var pusher = new Pusher('APP_KEY');
-    var channel = pusher.subscribe('{{object.id}}');
+    var pusher = new Pusher('ba23c5dd4731d5bfa933');
+    var channel = pusher.subscribe('playlist_{{object.id}}');
     channel.bind('update', function(data) {
       alert('An event was triggered with message: ' + data.message);
     });

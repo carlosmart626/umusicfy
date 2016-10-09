@@ -1,0 +1,190 @@
+{% extends "base.html" %}
+
+{% block navigation %}
+{% endblock %}
+
+{% block content %}
+<div id="song-search" class="ui fluid input search action">
+  <input class="prompt" type="text" placeholder="Search song...">
+  <div class="ui floating dropdown labeled icon button teal playlist">
+    <i class="plus icon"></i>
+    <span class="text">Playlist</span>
+    <div class="menu">
+      <div class="ui icon search input">
+        <i class="search icon"></i>
+        <input type="text" placeholder="Search playlist...">
+      </div>
+      <div class="divider"></div>
+      <div class="header">
+        <i class="music icon"></i>
+        Playlist
+      </div>
+      <div class="scrolling menu">
+          {% for playlist in user.userprofile.get_user_playlist %}
+          <a class="item" href="#" onClick="addSongSelected({{playlist.id}});"></i>{{playlist.title}}</a>
+          {% endfor %}
+      </div>
+    </div>
+    </div>
+  <div class="results"></div>
+</div>
+<table class="ui compact celled table">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Artist</th>
+      <th>Album</th>
+      <th>Duration</th>
+      <th>Ranking</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+      {% for song in object_list  %}
+          <tr>
+            <td>{{song.title}}</td>
+            <td>{{song.album.artist}}</td>
+            <td>{{song.album.name}}</td>
+            <td>{{song.get_duration_time}}</td>
+            <td>{{song.ranking}}</td>
+            <td>
+                <div class="ui floating dropdown labeled icon button teal playlist">
+                  <i class="plus icon"></i>
+                  <span class="text">Playlist</span>
+                  <div class="menu">
+                    <div class="ui icon search input">
+                      <i class="search icon"></i>
+                      <input type="text" placeholder="Search playlist...">
+                    </div>
+                    <div class="divider"></div>
+                    <div class="header">
+                      <i class="music icon"></i>
+                      Playlist
+                    </div>
+                    <div class="scrolling menu">
+                        {% for playlist in user.userprofile.get_user_playlist %}
+                        <a class="item" href="#" onClick="addSong({{playlist.id}},{{song.id}});"></i>{{playlist.title}}</a>
+                        {% endfor %}
+                    </div>
+                  </div>
+                </div>
+            </td>
+          </tr>
+      {% empty %}
+          <p>
+              No songs
+          </p>
+      {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
+
+{% block extra_js %}
+<script type="text/javascript">
+$('.ui.dropdown.playlist').dropdown({
+    on: 'hover',
+    action: 'hide'
+});
+function addSong(playlist, song) {
+    console.log(playlist)
+    console.log(song)
+    console.log("/user-profile/add-song/" + playlist + "/" + song)
+    $.get( "/user-profile/add-song/" + playlist + "/" + song, function( data ) {
+      $( ".result" ).html( data );
+      alert( data );
+    });
+}
+function addSongSelected(playlist) {
+    console.log(playlist)
+    console.log($('#song-search').val());
+    console.log("/user-profile/add-song/" + playlist + "/" + $('#song-search').val());
+    $.get( "/user-profile/add-song/" + playlist + "/" + $('#song-search').val(), function( data ) {
+      $( ".result" ).html( data );
+      alert( data );
+    });
+}
+</script>
+<script src="https://cdn.jsdelivr.net/algoliasearch/3/algoliasearch.min.js"></script>
+<script type="text/javascript">
+// var client = algoliasearch("C1R5PGKVPF", '8af1255c7cf5f4e84b5d1ec590d0b1c3');
+// var index = client.initIndex('song_name_index');
+// $( "#search-song" ).keypress(function() {
+//     // only query string
+//     console.log($("#search-song").val())
+//     index.search( $("#search-song").val() , function searchDone(err, content) {
+//       if (err) {
+//         console.error(err);
+//         return;
+//       }
+//
+//       for (var h in content.hits) {
+//         console.log('Hit(' + content.hits[h].objectID + '): ' + content.hits[h]);
+//       }
+//     });
+//
+//     // with params
+//     // index.search('query string', {
+//     //   attributesToRetrieve: ['firstname', 'lastname'],
+//     //   hitsPerPage: 50
+//     // }, function searchDone(err, content) {
+//     //   if (err) {
+//     //     console.error(err);
+//     //     return;
+//     //   }
+//     //
+//     //   for (var h in content.hits) {
+//     //     console.log('Hit(' + content.hits[h].objectID + '): ' + content.hits[h].toString());
+//     //   }
+//     // });
+// }
+// );
+</script>
+<script type="text/javascript">
+var algolia = {
+id: "C1R5PGKVPF",
+key: "8af1255c7cf5f4e84b5d1ec590d0b1c3",
+index: "song_name_index"
+};
+
+$('#song-search')
+.search({
+cache: false,
+apiSettings: {
+  method: 'post',
+  url: 'https://' + algolia.id + '-dsn.algolia.net/1/indexes/' + algolia.index + '/query',
+  beforeXHR: function(xhr) {
+    // adjust XHR with additional headers
+    xhr.setRequestHeader ('X-Algolia-API-Key', algolia.key);
+    xhr.setRequestHeader ('X-Algolia-Application-Id', algolia.id);
+
+    return xhr;
+  },
+  beforeSend: function(settings) {
+    // Retrieve the actual query and urlencode it. There's definitely a better way to do this...
+    settings.data = JSON.stringify({ "params" : "query=" + encodeURIComponent(settings.urlData.query) + "&hitsPerPage=5" });
+    return settings;
+  },
+  onResponse: function(algoliaResponse) {
+    var
+      response = {
+        results : []
+      }
+    ;
+    // translate Algolia API response to work with search.
+    $.each(algoliaResponse.hits, function(index, item) {
+      // Of course you'll have to adapt this to your needs.
+      response.results.push({
+        id          : item.objectID,
+        title       : item.title,
+        url         : "/myroute/" + item.objectID
+      });
+    });
+    return response;
+  },
+},
+  onSelect: function(result, response) {
+        $('#song-search').val(result.id)
+  },
+});
+</script>
+{% endblock %}

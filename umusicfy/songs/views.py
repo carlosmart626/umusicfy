@@ -1,6 +1,7 @@
 
 from rest_framework import viewsets
 from django.views.generic import DetailView, View
+from django.views.generic.list import ListView
 from .serializers import ArtistSerializer, SongSerializer, AlbumSerializer
 from .models import Artist, Album, Song
 
@@ -68,4 +69,14 @@ class FollowArtistView(View):
         '''
         user_to_folow = Artist.objects.get(id=self.kwargs['artist_name_slug'])
         request.user.following.add(user_to_folow)
-        return HttpResponseRedirect('/user-profile/' + str(request.user.id))
+        return HttpResponseRedirect('/user-profile/')
+
+
+class SongsListView(ListView):
+
+    model = Song
+    template_name = 'song_listview.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(SongsListView, self).get_context_data(**kwargs)
+        return context

@@ -1,4 +1,5 @@
 from __future__ import unicode_literals
+import time
 from django.contrib.auth.models import User
 from django.db import models
 from django.template.defaultfilters import slugify
@@ -13,8 +14,8 @@ class Artist(models.Model):
     """
     Model Artist
     """
-    name = models.CharField(max_length=250)
-    name_slug = models.SlugField(max_length=250, blank=True, null=True)
+    name = models.CharField(max_length=50)
+    name_slug = models.SlugField(max_length=50, blank=True, null=True)
     profile_picture = models.ImageField(upload_to=upload_to_artist, height_field=512, width_field=512)
     profile_hero_image = models.ImageField(upload_to=upload_to_artist, height_field=300, width_field=1500)
     followers = models.ManyToManyField(User)
@@ -40,8 +41,8 @@ class Album(models.Model):
     """
     Model Album
     """
-    name = models.CharField(max_length=250)
-    name_slug = models.SlugField(max_length=250, blank=True, null=True)
+    name = models.CharField(max_length=50)
+    name_slug = models.SlugField(max_length=50, blank=True, null=True)
     album_cover = models.ImageField(upload_to=upload_to_artist, height_field=512, width_field=512)
     artist = models.ForeignKey(Artist, blank=True, null=True)
     publication_date = models.DateField()
@@ -65,10 +66,13 @@ class Song(models.Model):
     """
     Model Song
     """
-    title = models.CharField(max_length=250)
+    title = models.CharField(max_length=50)
     rating = models.PositiveIntegerField(default=0)
     album = models.ForeignKey(Album)
-    duration = models.CharField(max_length=8)
+    duration = models.IntegerField(default=0)
+
+    def get_duration_time(self):
+        return time.strftime("%M:%S", time.gmtime(self.duration))
 
     def __unicode__(self):
         return smart_unicode(self.title)

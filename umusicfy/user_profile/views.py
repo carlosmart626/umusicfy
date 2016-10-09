@@ -1,12 +1,17 @@
 # encoding:utf-8
 
 from django.views.generic import DetailView, UpdateView, View, CreateView
+from django.views.generic.list import ListView
 from django.contrib.auth.models import User
 from .forms import UserProfileUpdateForm, SetPasswordForm
 from django.http import HttpResponseRedirect
+from django.http import HttpResponse
+from pusher import Pusher
 
-from .models import PlayList, UserProfile
+from .models import PlayList, UserProfile, SongsPlaylist
 from .forms import PlaylistForm
+
+from songs.models import Song
 
 
 class UserProfileView(DetailView):
@@ -22,7 +27,7 @@ class UserProfileView(DetailView):
 class UpdateUserProfileView(UpdateView):
     template_name = 'userprofile_update.html'
     form_class = UserProfileUpdateForm
-    success_url = '/perfil/'
+    success_url = '/user-profile/'
 
     def get(self, request, *args, **kwargs):
         self.object = request.user
@@ -31,10 +36,12 @@ class UpdateUserProfileView(UpdateView):
         return self.render_to_response(self.get_context_data(form=form))
 
     def post(self, request, *args, **kwargs):
-        self.object = request.user
+        self.object = request.user.userprofile
         form_class = self.get_form_class()
         form = self.get_form(form_class)
         if form.is_valid():
+            form.save()
+            print ('FORMULARIO VALIDO')
             return self.form_valid(form)
         else:
             return self.form_invalid(form)
@@ -62,6 +69,8 @@ class UpdateUserPasswordView(UpdateView):
 class UserProfileDetailView(DetailView):
     model = User
     template_name = 'userprofile_main.html'
+    slug_url_kwarg = 'artist_name_slug'
+    slug_field = 'name_slug'
 
     def get_context_data(self, **kwargs):
         context = super(UserProfileDetailView, self).get_context_data(**kwargs)
@@ -72,6 +81,8 @@ class UserProfileDetailView(DetailView):
 class PlaylistDetailView(DetailView):
     model = PlayList
     template_name = 'userprofile_playlist.html'
+    slug_url_kwarg = 'playlist_slug'
+    slug_field = 'title_slug'
 
 
 class PlaylistCreateView(CreateView):
@@ -94,7 +105,34 @@ class PlaylistCreateView(CreateView):
         """
         Returns the supplied success URL.
         """
-        return '/user-profile/' + str(self.object.owner) + "/" + str(self.object.id)
+        return '/user-profile/' + str(self.object.owner) + "/" + str(self.object.title_slug)
+
+
+class PlayListListView(ListView):
+
+    model = PlayList
+    template_name = 'userprofile_playlists_list.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(PlayListListView, self).get_context_data(**kwargs)
+        context['playlist_following'] = self.request.user.userprofile.get_playlists_following()
+        return context
+
+
+class AddToPlaylistView(View):
+
+    def get(self, request, *args, **kwargs):
+        '''
+        '''
+        playlist = PlayList.objects.get(id=self.kwargs['playlist_id'])
+        song = Song.objects.get(id=self.kwargs['song_id'])
+        SongsPlaylist.objects.create(
+            playlist=playlist,
+            song=song,
+        )
+        pusher = Pusher(app_id=u'256573', key=u'ba23c5dd4731d5bfa933', secret=u'173bf632b3736f3e3d20')
+        pusher.trigger('playlist_%d' % playlist.id, 'update', {'song': song.title})
+        return HttpResponse("Added!")
 
 
 class FollowUserProfileView(View):
@@ -112,6 +150,6 @@ class FollowPlaylistView(View):
     def get(self, request, *args, **kwargs):
         '''
         '''
-        playlist_to_folow = Playlist.objects.get(id=self.kwargs['playlist_id'])
+        playlist_to_folow = PlayList.objects.get(id=self.kwargs['playlist_id'])
         playlist_to_folow.followers.add(request.user)
         return HttpResponseRedirect('/user-profile/' + str(playlist_to_folow.owner) + "/" + str(playlist_to_folow.id))

@@ -5,7 +5,7 @@ from django.forms import ModelForm
 from django.utils.translation import ugettext_lazy as _
 from django.contrib.auth.models import User
 
-from .models import PlayList
+from .models import PlayList, UserProfile
 
 
 class UserProfileUpdateForm(ModelForm):
@@ -13,13 +13,11 @@ class UserProfileUpdateForm(ModelForm):
     A form that lets a user update it's data
     """
     class Meta:
-        model = User
+        model = UserProfile
 
-        fields = ('first_name', 'last_name', 'email', )
+        fields = ('profile_picture', 'biography',)
         widgets = {
-            'first_name': forms.TextInput(attrs={'class': 'datos_usuario form-control', 'placeholder': _('First Name'), }),
-            'last_name': forms.TextInput(attrs={'class': 'datos_usuario form-control', 'placeholder': _('Last Name'), }),
-            'email': forms.TextInput(attrs={'class': 'datos_usuario form-control', 'placeholder': _('e-mail'), }),
+            'biography': forms.Textarea(attrs={'class': 'datos_usuario form-control', 'placeholder': _('Write your biography'), }),
         }
 
     class Media:

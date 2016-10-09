@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block navigation %}
+{% endblock %}
+
+{% block content %}
+    {% for playlist in object_list  %}
+        <p>
+            {{playlist}} - {{playlist.get_duration_time}} - {{playlist.get_songs_number}} songs <a href="{% url 'user_playlist' user.username playlist.title_slug %}">Detail</a>
+        </p>
+    {% empty %}
+        <p>
+            No Playlist
+        </p>
+    {% endfor %}
+    {% if playlist_following %}
+    <h2>Playlist following</h2>
+    {% endif %}
+    {% for playlist in playlist_following %}
+        <p>
+            {{playlist}} - {{playlist.get_duration_time}} - {{playlist.get_songs_number}} songs
+        </p>
+    {% endfor %}
+{% endblock %}

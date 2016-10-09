@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block title %}
-	User Profile
+    User Profile
 {% endblock %}
 
 {% block extra_css %}
@@ -11,41 +11,53 @@
 
 {% endblock %}
 
-{% block contenido %}
+{% block content %}
     <!-- About Section -->
     <section id="descripcion" class="about-section">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
                     <h1><strong>User: {{object.username}}</strong></h1>
+                    <h4>Last login: <small>{{ object.last_login }}</small></h4>
                 </div>
             </div>
             <div class="row ">
-	            <div class="col-md-4">
-					<img class="feature-img" src="/static/img/user_icon_512.png" alt=""/>
+                <div class="col-md-4">
                 </div>
                 <div class="col-md-8">
-					<img class="userprofile-img" src="{{object.profile_picture}}" alt=""/>
-	                <p><strong>Name: </strong> {{object.first_name}}</p>
-	                <p><strong>Last Name: </strong> {{object.last_name}}</p>
-	                <p><strong>email: </strong> {{object.email}}</p>
-					<p><strong>email: </strong> {{object.email}}</p>
-	                <h3>Friends:</h3>
-	                {% for group in object.friends.all %}
-	                	<p>{{ group.name }}</p>
-	                {% empty %}
-	                	<p>No pertenece a ningun grupo</p>
-	                {% endfor %}
-	                <h3>Last login: <small>{{ object.last_login }}</small></h3>
-	                <hr>
-	                <div class="row">
-		                <div class="col-xs-6 col-sm-4 col-sm-offset-2">
-			                <p><a class="btn btn-block btn-small btn-info" href="{% url 'user_change_password' %}">Change password</a></p>
-		                </div>
-		                <div class="col-xs-6 col-sm-4 ">
-			                <p><a class="btn btn-block btn-small btn-warning" href="{% url 'user_change_password' %}">Update profile</a></p>
-		                </div>
-	                </div>
+                    <img class="userprofile-img" src="/media/{{object.userprofile.profile_picture}}" alt=""/>
+                    <p><strong>Name: </strong> {{object.first_name}} {{object.last_name}}</p>
+                    <p><strong>email: </strong> {{object.email}}</p>
+                    <p><strong>Biography: </strong> {{object.userprofile.biography}}</p>
+                    <h3>Following:</h3>
+                    {% for user in object.userprofile.following.all %}
+                        <p>{{ user }}</p>
+                    {% empty %}
+                        <p>You are not following any user</p>
+                    {% endfor %}
+                    <h3>Playlists:</h3>
+                    {% for playlist in object.userprofile.get_user_playlist %}
+                        <p>
+                            <a href="{% url 'user_playlist' user.username playlist.title_slug %}">{{ playlist }}</a>
+                        </p>
+                    {% empty %}
+                        <p>You don't have playlist</p>
+                    {% endfor %}
+                    <a href="{% url 'user_create_playlist' %}">Create playlist</a>
+                    <h3>Users following:</h3>
+                    {% for user in object.userprofile.get_followers %}
+                        <p>{{ user }}</p>
+                    {% empty %}
+                        <p>No users are following you</p>
+                    {% endfor %}
+                    <div class="row">
+                        <div class="col-xs-6 col-sm-4 col-sm-offset-2">
+                            <p><a class="btn btn-block btn-small btn-info" href="{% url 'user_change_password' %}">Change password</a></p>
+                        </div>
+                        <div class="col-xs-6 col-sm-4 ">
+                            <p><a class="btn btn-block btn-small btn-warning" href="{% url 'user_update_profile' %}">Update profile</a></p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
