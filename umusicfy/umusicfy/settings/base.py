@@ -255,6 +255,8 @@ SOCIALACCOUNT_PROVIDERS = \
 
 LOGIN_REDIRECT_URL = '/user-profile/'
 
+DEFAULT_FROM_EMAIL = 'no-reply@umusicfy.ml'
+
 EMAIL_HOST = 'smtp.sendgrid.net'
 EMAIL_HOST_USER = 'umusicfyapp'
 EMAIL_HOST_PASSWORD = 'the.umusicfyapp.2015'
