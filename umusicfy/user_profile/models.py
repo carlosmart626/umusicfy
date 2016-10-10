@@ -83,6 +83,16 @@ class SongsPlaylist(models.Model):
 
 
 def send_email_notification(sender, instance, created, **kwargs):
-    send_email_notification_task(instance.owner, instance)
+    send_email_notification_task().delay(instance.owner, instance)
 
 post_save.connect(send_email_notification, sender=PlayList)
+
+
+def create_profile(sender, **kwargs):
+    user = kwargs["instance"]
+    if kwargs["created"]:
+        profile = UserProfile()
+        profile.user = user
+        profile.save()
+
+post_save.connect(create_profile, sender=User)
