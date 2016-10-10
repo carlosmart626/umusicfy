@@ -83,6 +83,6 @@ class SongsPlaylist(models.Model):
 
 
 def send_email_notification(sender, instance, created, **kwargs):
-    send_email_notification_task(instance.owner, instance).delay()
+    send_email_notification_task(instance.owner, instance)
 
 post_save.connect(send_email_notification, sender=PlayList)
