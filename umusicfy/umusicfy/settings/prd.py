@@ -15,3 +15,5 @@ DATABASES = {
 }
 
 SECRET_KEY = os.environ['SECRET_KEY']
+
+INSTALLED_APPS += ('mockups',)
