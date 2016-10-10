@@ -58,6 +58,7 @@ INSTALLED_APPS = [
     'allauth.socialaccount.providers.facebook',
     'allauth.socialaccount.providers.github',
     'django.contrib.algoliasearch',
+    'djcelery',
 
     # Apps
     'user_profile',
