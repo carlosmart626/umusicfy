@@ -3,8 +3,8 @@ from django.template import loader
 from django.conf import settings
 from django.core.mail import send_mail
 
-EMAIL_TEMPLATE_NAME = 'user_profile/playlist_notification.txt'
-EMAIL_SUBJECT_TEMPLATE_NAME = 'user_profile/playlist_notification_subject.txt'
+EMAIL_TEMPLATE_NAME = 'playlist_notification.txt'
+EMAIL_SUBJECT_TEMPLATE_NAME = 'playlist_notification_subject.txt'
 
 
 @shared_task
