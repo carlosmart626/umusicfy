@@ -33,6 +33,9 @@ class Artist(models.Model):
     def get_songs(self):
         return Song.objects.filter(album__artist=self)
 
+    def get_followers_count(self):
+        return len(self.followers.all())
+
     def __unicode__(self):
         return smart_unicode(self.name)
 

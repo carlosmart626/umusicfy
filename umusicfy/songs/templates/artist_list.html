@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h2><i class="music icon"></i> Registed Artists</h2>
+    <table class="ui compact celled table">
+      <thead>
+        <tr>
+          <th>Artist Nanme</th>
+          <th>Followers</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+          {% for artist in object_list %}
+              <tr>
+                <td>{{artist.name}}</td>
+                <td>{{artist.get_followers_count}} </td>
+                <td>
+                    <a href="{% url 'artist_detail_view' artist.name_slug %}" class="ui right labeled teal icon button">
+                      <i class="right arrow icon"></i>
+                      View Detail
+                  </a>
+                </td>
+              </tr>
+          {% empty %}
+              <th colspan="4">No artists registred!</th>
+          {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

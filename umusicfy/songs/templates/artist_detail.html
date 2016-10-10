@@ -1,24 +1,116 @@
 {% extends "base.html" %}
 
 {% block content %}
-    {% for album in top_albums %}
-        <p>
-            {{album}}
-        </p>
-    {% endfor %}
-    {% for song in top_songs  %}
-        <p>
-            {{song}}
-        </p>
-    {% endfor %}
-    {% for album in albums %}
-        <p>
-            {{album}}
-        </p>
-    {% endfor %}
-    {% for song in songs  %}
-        <p>
-            {{song}}
-        </p>
-    {% endfor %}
+    <div class="ui two column stackable grid">
+        <div class="sixteen wide column">
+            <h1><strong>{{object.name}}'s Profile</strong></h1>
+        </div>
+
+      <div class="eight wide column">
+          <h2>Top Albums</h2>
+          <table class="ui compact celled table">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Songs</th>
+                <th>Duration</th>
+                <th>Publication Date</th>
+                <th>Rating</th>
+              </tr>
+            </thead>
+            <tbody>
+                {% for album in top_albums %}
+                    <tr>
+                      <td><a href="{% url 'album_detail_view' object.name_slug album.name_slug %}">{{album.name}}</a></td>
+                      <td>{{album.get_songs_number}}</td>
+                      <td>{{album.get_duration_time}}</td>
+                      <td>{{album.publication_date}}</td>
+                      <td>{{album.rating}}</td>
+                    </tr>
+                {% empty %}
+                    <tr>
+                    </tr>
+                {% endfor %}
+              </tbody>
+          </table>
+      </div>
+      <div class="eight wide column">
+          <h2>Top Songs</h2>
+          <table class="ui compact celled table">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Album</th>
+                <th>Duration</th>
+                <th>Ranking</th>
+              </tr>
+            </thead>
+            <tbody>
+                {% for song in top_songs  %}
+                    <tr>
+                      <td>{{song.title}}</td>
+                      <td>{{song.album.name}}</td>
+                      <td>{{song.get_duration_time}}</td>
+                      <td>{{song.ranking}}</td>
+                    </tr>
+                {% empty %}
+                <tr>
+                </tr>
+                {% endfor %}
+              </tbody>
+          </table>
+      </div>
+    </div>
+    <div class="ui one column stackable grid">
+    <h3>Albums</h3>
+        <table class="ui compact celled table">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Songs</th>
+              <th>Duration</th>
+              <th>Publication Date</th>
+              <th>Rating</th>
+            </tr>
+          </thead>
+          <tbody>
+              {% for album in albums %}
+                  <tr>
+                    <td><a href="{% url 'album_detail_view' object.name_slug album.name_slug %}">{{album.name}}</a></td>
+                    <td>{{album.get_songs_number}}</td>
+                    <td>{{album.get_duration_time}}</td>
+                    <td>{{album.publication_date}}</td>
+                    <td>{{album.rating}}</td>
+                  </tr>
+              {% empty %}
+                  <tr>
+                  </tr>
+              {% endfor %}
+            </tbody>
+        </table>
+    <h3>Songs</h3>
+    <table class="ui compact celled table">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Album</th>
+          <th>Duration</th>
+          <th>Ranking</th>
+        </tr>
+      </thead>
+      <tbody>
+          {% for song in songs  %}
+              <tr>
+                <td>{{song.title}}</td>
+                <td>{{song.album.name}}</td>
+                <td>{{song.get_duration_time}}</td>
+                <td>{{song.ranking}}</td>
+              </tr>
+          {% empty %}
+          <tr>
+          </tr>
+          {% endfor %}
+        </tbody>
+    </table>
+    </div>
 {% endblock %}

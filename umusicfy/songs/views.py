@@ -62,6 +62,16 @@ class AlbumDetailView(DetailView):
         return context
 
 
+class ArtistListView(ListView):
+
+    model = Artist
+    template_name = 'artist_list.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(ArtistListView, self).get_context_data(**kwargs)
+        return context
+
+
 class FollowArtistView(View):
 
     def get(self, request, *args, **kwargs):

@@ -18,7 +18,7 @@
             <td>{{song.album.artist}}</td>
             <td>{{song.album.name}}</td>
             <td>{{song.get_duration_time}}</td>
-            <td>{{song.ranking}}</td>
+            <td>{{song.rating}}</td>
           </tr>
       {% empty %}
           <p>
@@ -27,7 +27,10 @@
       {% endfor %}
     </tbody>
 </table>
-    <a href="{% url 'song_list_view' %}">Add Songs</a>
+<a href="{% url 'song_list_view' %}" class="ui labeled icon teal button">
+  <i class="add icon"></i>
+  Add Songs
+</a>
 {% endblock %}
 
 {% block extra_js %}

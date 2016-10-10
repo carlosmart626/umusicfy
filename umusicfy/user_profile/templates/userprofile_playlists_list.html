@@ -4,17 +4,36 @@
 {% endblock %}
 
 {% block content %}
-    {% for playlist in object_list  %}
-        <p>
-            {{playlist}} - {{playlist.get_duration_time}} - {{playlist.get_songs_number}} songs <a href="{% url 'user_playlist' user.username playlist.title_slug %}">Detail</a>
-        </p>
-    {% empty %}
-        <p>
-            No Playlist
-        </p>
-    {% endfor %}
+    <h2><i class="music icon"></i> {{user.username}}'s playlists</h2>
+    <table class="ui compact celled table">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Duration</th>
+          <th>Songs</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+          {% for playlist in object_list  %}
+              <tr>
+                <td>{{playlist}}</td>
+                <td>{{playlist.get_duration_time}} </td>
+                <td>{{playlist.get_songs_number}} songs</td>
+                <td>
+                    <a href="{% url 'user_playlist' playlist.owner playlist.title_slug %}" class="ui right labeled orange icon button">
+                      <i class="right arrow icon"></i>
+                      View Detail
+                  </a>
+                </td>
+              </tr>
+          {% empty %}
+              <th colspan="4">No playlist created yet!</th>
+          {% endfor %}
+        </tbody>
+    </table>
     {% if playlist_following %}
-    <h2>Playlist following</h2>
+        <h2>Playlist following</h2>
     {% endif %}
     {% for playlist in playlist_following %}
         <p>

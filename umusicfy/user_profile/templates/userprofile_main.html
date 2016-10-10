@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load humanize %}
 
 {% block title %}
     User Profile
@@ -12,56 +13,77 @@
 {% endblock %}
 
 {% block content %}
-    <!-- About Section -->
-    <section id="descripcion" class="about-section">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <h1><strong>User: {{object.username}}</strong></h1>
-                    <h4>Last login: <small>{{ object.last_login }}</small></h4>
-                </div>
+    <div class="ui two column stackable grid">
+        <div class="sixteen wide column">
+            <h1><strong>Hi! {{object.username}}</strong></h1>
+            <h4>Last login: <small>{{ object.last_login }}</small></h4>
+        </div>
+      <div class="ten wide column">
+            <p><strong>Name: </strong> {{object.first_name}} {{object.last_name}}</p>
+            <p><strong>email: </strong> {{object.email}}</p>
+            <p><strong>Biography: </strong> {{object.userprofile.biography}}</p>
+      </div>
+      <div class="six wide column">
+            <img class="userprofile-img ui centered small rounded image" src="/media/{{object.userprofile.profile_picture}}" alt=""/>
+      </div>
+      <div class="eight wide column">
+          <h3>Playlists:</h3>
+          <div class="ui relaxed divided list">
+          {% for playlist in object.userprofile.get_user_playlist %}
+          <div class="item">
+            <i class="large music middle aligned icon"></i>
+            <div class="content">
+              <a href="{% url 'user_playlist' user.username playlist.title_slug %}" class="header">{{ playlist }}</a>
+              <div class="description">{{ playlist.get_songs_number }} songs : {{playlist.get_duration_time}}</div>
             </div>
-            <div class="row ">
-                <div class="col-md-4">
-                </div>
-                <div class="col-md-8">
-                    <img class="userprofile-img" src="/media/{{object.userprofile.profile_picture}}" alt=""/>
-                    <p><strong>Name: </strong> {{object.first_name}} {{object.last_name}}</p>
-                    <p><strong>email: </strong> {{object.email}}</p>
-                    <p><strong>Biography: </strong> {{object.userprofile.biography}}</p>
-                    <h3>Following:</h3>
+          </div>
+          {% empty %}
+          <div class="item">
+              <p>You don't have playlist</p>
+          </div>
+          {% endfor %}
+          </div>
+          <a href="{% url 'user_create_playlist' %}" class="ui labeled teal icon button">
+              <i class="add icon"></i>
+              Create playlist
+          </a>
+      </div>
+      <div class="eight wide column">
+            <h3>Following:</h3>
+                <div class="ui list">
                     {% for user in object.userprofile.following.all %}
-                        <p>{{ user }}</p>
-                    {% empty %}
-                        <p>You are not following any user</p>
-                    {% endfor %}
-                    <h3>Playlists:</h3>
-                    {% for playlist in object.userprofile.get_user_playlist %}
-                        <p>
-                            <a href="{% url 'user_playlist' user.username playlist.title_slug %}">{{ playlist }}</a>
-                        </p>
-                    {% empty %}
-                        <p>You don't have playlist</p>
-                    {% endfor %}
-                    <a href="{% url 'user_create_playlist' %}">Create playlist</a>
-                    <h3>Users following:</h3>
-                    {% for user in object.userprofile.get_followers %}
-                        <p>{{ user }}</p>
-                    {% empty %}
-                        <p>No users are following you</p>
-                    {% endfor %}
-                    <div class="row">
-                        <div class="col-xs-6 col-sm-4 col-sm-offset-2">
-                            <p><a class="btn btn-block btn-small btn-info" href="{% url 'user_change_password' %}">Change password</a></p>
-                        </div>
-                        <div class="col-xs-6 col-sm-4 ">
-                            <p><a class="btn btn-block btn-small btn-warning" href="{% url 'user_update_profile' %}">Update profile</a></p>
+                    <div class="item">
+                        <img class="ui avatar image" src="/media/{{user.userprofile.profile_picture}}">
+                        <div class="content">
+                            <a class="header" href="">{{user.username}}</a>
+                            <div class="description">Last seen <b>{{user.last_login}}</b></div>
                         </div>
                     </div>
+                    {% empty %}
+                    <div class="item">
+                        You are not following any user
+                    </div>
+
+                    {% endfor %}
                 </div>
-            </div>
-        </div>
-    </section>
+            <h3>Followers:</h3>
+                <div class="ui list">
+                    {% for user in object.userprofile.get_followers %}
+                    <div class="item">
+                        <img class="ui avatar image" src="/images/avatar2/small/rachel.png">
+                        <div class="content">
+                            <a class="header" href="">{{user.username}}</a>
+                            <div class="description">Last seen <b>{{user.last_login}}</b></div>
+                        </div>
+                    </div>
+                    {% empty %}
+                    <div class="item">
+                        No users are following you
+                    </div>
+                    {% endfor %}
+      </div>
+    </div>
+</div>
 {% endblock %}
 
 {% block extra_js %}

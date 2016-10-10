@@ -9,12 +9,12 @@ umusicfy:
   volumes:
     - /usr/src/app
     - /usr/src/app/static
-#    - /var/www/umusicfy/media:/usr/src/app/media
-#    - /var/www/umusicfy.ml/static:/var/www/umusicfy.ml/static
+    - /var/www/umusicfy/media:/usr/src/app/media
+    - /var/www/umusicfy.ml/static:/var/www/umusicfy.ml/static
   env_file: .env
   environment:
     DEBUG: 'True'
-  command: ./run_web.sh
+  command: /usr/local/bin/gunicorn umusicfy.wsgi:application -w 2 -b :8000
 
 celery:
   restart: always
@@ -41,7 +41,7 @@ nginx:
   volumes:
     - /var/www/umusicfy.ml/static/
     - /www/media
-#    - /etc/letsencrypt:/etc/letsencrypt
+    - /etc/letsencrypt:/etc/letsencrypt
   volumes_from:
     - umusicfy
   links:
