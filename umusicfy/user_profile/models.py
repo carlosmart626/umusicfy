@@ -82,8 +82,9 @@ class SongsPlaylist(models.Model):
     added_time = models.DateField(auto_now_add=True)
 
 
-def send_email_notification(sender, instance, created, **kwargs):
-    send_email_notification_task().delay(instance.owner, instance)
+def send_email_notification(sender, **kwargs):
+    playlist = kwargs["instance"]
+    send_email_notification_task.delay(playlist.owner.username, playlist.title, playlist.owner.email)
 
 post_save.connect(send_email_notification, sender=PlayList)
 

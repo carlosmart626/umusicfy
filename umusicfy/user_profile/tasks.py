@@ -7,8 +7,8 @@ EMAIL_TEMPLATE_NAME = 'playlist_notification.txt'
 EMAIL_SUBJECT_TEMPLATE_NAME = 'playlist_notification_subject.txt'
 
 
-@task(name="send_mail")
-def send_email_notification_task(user, playlist):
+@task(name="send_email_notification_task")
+def send_email_notification_task(user, playlist, email):
     context = {
         'user': user,
         'playlist': playlist,
@@ -18,5 +18,5 @@ def send_email_notification_task(user, playlist):
     subject = loader.render_to_string(EMAIL_SUBJECT_TEMPLATE_NAME,
                                       context).strip()
     send_mail(subject, body, settings.DEFAULT_FROM_EMAIL,
-              [user.email])
-    return 'The notification for new playlist has been send to user "%s" ' % user.username
+              [email])
+    return 'The notification for new playlist has been send to user "%s" ' % user

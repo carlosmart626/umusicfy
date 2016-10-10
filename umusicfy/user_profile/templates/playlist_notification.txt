@@ -1,4 +1,4 @@
-Hi {{ user.username }},
+Hi {{ user }},
 
 You have created a new playlist called {{ playlist.name }}.
 
