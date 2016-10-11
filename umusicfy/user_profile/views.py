@@ -115,7 +115,7 @@ class PlayListListView(ListView):
 
     def get_context_data(self, **kwargs):
         context = {}
-        context['object_list'] = self.request.user.userprofile.get_playlists()
+        context['object_list'] = self.request.user.userprofile.get_user_playlist()
         context['playlist_following'] = self.request.user.userprofile.get_playlists_following()
         return context
 
