@@ -39,7 +39,7 @@
     var pusher = new Pusher('ba23c5dd4731d5bfa933');
     var channel = pusher.subscribe('playlist_{{object.id}}');
     channel.bind('update', function(data) {
-      alert('An event was triggered with message: ' + data.message);
+      alert('A was added to this playlist refresh to update list');
     });
 </script>
 {% endblock %}

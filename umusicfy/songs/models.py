@@ -61,6 +61,18 @@ class Album(models.Model):
     def get_songs(self):
         return Song.objects.filter(album=self)
 
+    def get_duration_time(self):
+        duration = 0
+        for song in self.get_songs():
+            duration = duration + song.duration
+        return time.strftime("%H:%M:%S", time.gmtime(duration))
+
+    def get_songs_number(self):
+        number_songs = 0
+        for song in self.get_songs():
+            number_songs += 1
+        return number_songs
+
     def __unicode__(self):
         return "%s's %s" % (smart_unicode(self.artist), smart_unicode(self.name))
 

@@ -114,7 +114,8 @@ class PlayListListView(ListView):
     template_name = 'userprofile_playlists_list.html'
 
     def get_context_data(self, **kwargs):
-        context = super(PlayListListView, self).get_context_data(**kwargs)
+        context = {}
+        context['object_list'] = self.request.user.userprofile.get_playlists()
         context['playlist_following'] = self.request.user.userprofile.get_playlists_following()
         return context
 
@@ -126,6 +127,8 @@ class AddToPlaylistView(View):
         '''
         playlist = PlayList.objects.get(id=self.kwargs['playlist_id'])
         song = Song.objects.get(id=self.kwargs['song_id'])
+        song.rating = song.rating + 1
+        song.save()
         SongsPlaylist.objects.create(
             playlist=playlist,
             song=song,
