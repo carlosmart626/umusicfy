@@ -9,8 +9,8 @@ umusicfy:
   volumes:
     - /usr/src/app
     - /usr/src/app/static
-#    - /var/www/umusicfy/media:/usr/src/app/media
-#    - /var/www/umusicfy.ml/static:/var/www/umusicfy.ml/static
+    - ./media/:/var/www/umusicfy.ml/media
+    - ./static/:/var/www/umusicfy.ml/static
   env_file: .env
   environment:
     DEBUG: 'True'
@@ -25,8 +25,8 @@ celery:
   volumes:
     - /usr/src/app
     - /usr/src/app/static
-    - /var/www/umusicfy/media:/usr/src/app/media
-    - /var/www/umusicfy.ml/static:/var/www/umusicfy.ml/static
+    - ./media/:/var/www/umusicfy.ml/media
+    - ./media/:/var/www/umusicfy.ml/static
   env_file: .env
   environment:
     DEBUG: 'True'
@@ -37,11 +37,9 @@ nginx:
   build: ./nginx/
   ports:
     - "80:80"
-    - "443:443"
   volumes:
-    - /var/www/umusicfy.ml/static/
-    - /www/media
-#    - /etc/letsencrypt:/etc/letsencrypt
+    - ./static/:/var/www/umusicfy.ml/static/
+    - ./media/:/var/www/umusicfy.ml/media
   volumes_from:
     - umusicfy
   links:
@@ -50,14 +48,12 @@ nginx:
 postgres:
   restart: always
   image: postgres:latest
-  ports:
-    - "5432:5432"
-  volumes:
-    - pgdata:/var/lib/postgresql/data/
+  env_file: .env
 
 redis:
   restart: always
   image: redis:latest
+  env_file: .env
   ports:
     - "6379:6379"
   volumes:

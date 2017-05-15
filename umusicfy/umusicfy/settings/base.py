@@ -34,7 +34,7 @@ ALLOWED_HOSTS = ['*']
 
 ADMINS = (
     ('carlosmart', 'carlosmart626@gmail.com'),
-)
+    )
 
 MANAGERS = ADMINS
 
@@ -64,7 +64,7 @@ INSTALLED_APPS = [
     'user_profile',
     'songs',
     'index',
-]
+    ]
 
 SITE_ID = 1
 
@@ -76,7 +76,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-]
+    ]
 
 ROOT_URLCONF = 'umusicfy.urls'
 
@@ -85,7 +85,7 @@ TEMPLATES = [
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
             os.path.join(BASE_DIR, 'templates'),
-        ],
+            ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -94,10 +94,10 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'django.template.context_processors.request',
-            ],
+                ],
+            },
         },
-    },
-]
+    ]
 
 WSGI_APPLICATION = 'umusicfy.wsgi.application'
 
@@ -113,8 +113,8 @@ DATABASES = {
         'PASSWORD': 'umusicfy_pass',
         'HOST': 'localhost',
         'PORT': 5432
+        }
     }
-}
 
 
 # Password validation
@@ -123,17 +123,17 @@ DATABASES = {
 AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
-    },
+        },
     {
         'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
-    },
+        },
     {
         'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
-    },
+        },
     {
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
-    },
-]
+        },
+    ]
 
 
 # Internationalization
@@ -154,13 +154,13 @@ REST_FRAMEWORK = {
     # or allow read-only access for unauthenticated users.
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
-    ],
+        ],
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework.authentication.SessionAuthentication',
         'rest_framework.authentication.BasicAuthentication',
         'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
-    ),
-}
+        ),
+    }
 
 JWT_AUTH = {
     'JWT_ENCODE_HANDLER':
@@ -191,7 +191,7 @@ JWT_AUTH = {
     'JWT_REFRESH_EXPIRATION_DELTA': datetime.timedelta(days=7),
 
     'JWT_AUTH_HEADER_PREFIX': 'JWT',
-}
+    }
 
 # Absolute filesystem path to the directory that will hold user-uploaded files.
 # Example: "/var/www/example.com/media/"
@@ -222,7 +222,7 @@ STATICFILES_DIRS = (
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
     normpath(join(DJANGO_ROOT, 'static')),
-)
+    )
 
 # CELERY SETTINGS
 BROKER_URL = 'redis://redis:6379/0'
@@ -234,7 +234,7 @@ CELERY_RESULT_SERIALIZER = 'json'
 AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
     'allauth.account.auth_backends.AuthenticationBackend',
-)
+    )
 
 SOCIALACCOUNT_PROVIDERS = \
     {
@@ -250,8 +250,8 @@ SOCIALACCOUNT_PROVIDERS = \
             'EXCHANGE_TOKEN': True,
             'VERIFIED_EMAIL': False,
             'VERSION': 'v2.8'
+            }
         }
-    }
 
 LOGIN_REDIRECT_URL = '/user-profile/'
 
@@ -266,9 +266,10 @@ EMAIL_USE_TLS = True
 ALGOLIA = {
     'APPLICATION_ID': os.environ['ALGOLIA_APPLICATION_ID'],
     'API_KEY': os.environ['ALGOLIA_API_KEY']
-}
+    }
 
 pusher = Pusher(
     app_id=os.environ['PUSHER_APP_ID'],
-    key=os.environ['PUSHER_APP_ID'],
-    secret=u'173bf632b3736f3e3d20')
+    key=os.environ['PUSER_KEY'],
+    secret=os.environ['PUSHER_SECRET']
+    )
