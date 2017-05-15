@@ -41,7 +41,7 @@ class UpdateUserProfileView(UpdateView):
         form = self.get_form(form_class)
         if form.is_valid():
             form.save()
-            print ('FORMULARIO VALIDO')
+            print('FORMULARIO VALIDO')
             return self.form_valid(form)
         else:
             return self.form_invalid(form)

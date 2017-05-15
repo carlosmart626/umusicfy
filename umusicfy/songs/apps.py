@@ -5,6 +5,7 @@ from django.contrib import algoliasearch
 
 from .index import SongIndex
 
+
 class SongsConfig(AppConfig):
     name = 'songs'
 

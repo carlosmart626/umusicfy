@@ -257,15 +257,18 @@ LOGIN_REDIRECT_URL = '/user-profile/'
 
 DEFAULT_FROM_EMAIL = 'no-reply@umusicfy.ml'
 
-EMAIL_HOST = 'smtp.sendgrid.net'
-EMAIL_HOST_USER = 'umusicfyapp'
-EMAIL_HOST_PASSWORD = 'the.umusicfyapp.2015'
+EMAIL_HOST = os.environ['EMAIL_HOST']
+EMAIL_HOST_USER = os.environ['EMAIL_HOST_USER']
+EMAIL_HOST_PASSWORD = os.environ['EMAIL_HOST_PASSWORD']
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 
 ALGOLIA = {
-    'APPLICATION_ID': "C1R5PGKVPF",
-    'API_KEY': "5e20f37d67428e2f286dc7c7c465ca11"
+    'APPLICATION_ID': os.environ['ALGOLIA_APPLICATION_ID'],
+    'API_KEY': os.environ['ALGOLIA_API_KEY']
 }
 
-pusher = Pusher(app_id=u'256573', key=u'ba23c5dd4731d5bfa933', secret=u'173bf632b3736f3e3d20')
+pusher = Pusher(
+    app_id=os.environ['PUSHER_APP_ID'],
+    key=os.environ['PUSHER_APP_ID'],
+    secret=u'173bf632b3736f3e3d20')
