@@ -12,7 +12,7 @@ Django==1.10.2
 django-allauth==0.27.0
 django-celery==3.1.17
 django-filter==0.15.2
-djangorestframework==3.4.7
+djangorestframework==3.9.1
 djangorestframework-jwt==1.8.0
 docutils==0.12
 enum34==1.1.6
