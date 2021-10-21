@@ -3,7 +3,7 @@ algoliasearch==1.9.2
 algoliasearch-django==1.2.4
 amqp==1.4.9
 anyjson==0.3.3
-Babel==2.3.4
+Babel==2.9.1
 billiard==3.3.0.23
 celery==3.1.24
 cffi==1.8.3
